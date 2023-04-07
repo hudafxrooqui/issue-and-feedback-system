@@ -1,8 +1,8 @@
-// import other component 
+// import other component
 import UserProfile from '../UserProfile/UserProfile'
 import SideBarLinks from '../SideBarLinks/SideBarLinks'
 
-// import other pkg 
+// import other pkg
 import PropTypes from 'prop-types'
 
 const UserCard = ({ sidebarLinks, username, userBirthday, userEmail, onChangeToggle }) => {

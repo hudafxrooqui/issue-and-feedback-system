@@ -21,12 +21,12 @@ class Panel extends PureComponent {
     constructor(props) {
         super(props)
         this.myVerifyUser = this.getUserFromStorage()
-        
+
         this.state = {
             user: {...this.initState(this.myVerifyUser)},
-            toggle: 'information',
+            toggle: 'student details',
         }
-        
+
         this.sidebarLinks = [
             {
                 id: 1,
@@ -52,7 +52,7 @@ class Panel extends PureComponent {
                 text: 'Report ITL/EE Issue',
             }
 
-            
+
         ]
 
         this.logOut = this.logOut.bind(this)
@@ -64,7 +64,7 @@ class Panel extends PureComponent {
         const users = getStorage('users')
         const userId = getStorage('id')
         const myVerifyUser = users.find(user => user.id === userId)
-        
+
         return myVerifyUser
     }
 
@@ -87,7 +87,7 @@ class Panel extends PureComponent {
 
     changeUserInformation(keyInfos, valInfos) {
         let newInfo = {}
-        
+
         keyInfos.forEach((keyInfo, idx) => (
             newInfo[keyInfo] = valInfos[idx]
         ))
@@ -101,47 +101,50 @@ class Panel extends PureComponent {
             }
         })
     }
-        
+
     render() {
         return (
             <div className={`${styles['panel-wrapper']} d-flex align-items-center justify-content-center`}>
-                {/* <div className={styles['bg-overlay']}></div> TODO */} 
+                {/* <div className={styles['bg-overlay']}></div> TODO */}
                 <div className={`${styles.container} d-flex justify-content-center align-items-center p-0`}>
                     <Row className={`${styles['panel']} flex-column flex-md-row justify-content-center align-items-center px-3`}>
                         <Col xs={12} sm={8} md={4} className="d-flex flex-column justify-content-center p-0">
-                            <UserCard 
-                                username={this.state.user.username} 
-                                userBirthday={this.state.user.birthday} 
-                                userEmail={this.state.user.email} 
+                            <UserCard
+                                username={this.state.user.username}
+                                userBirthday={this.state.user.birthday}
+                                userEmail={this.state.user.email}
                                 sidebarLinks={this.sidebarLinks}
                                 onChangeToggle={this.changeToggle}
                             />
                         </Col>
-                        
+
                         <Col xs={12} sm={8} md={7} className={`${styles['panel-column']} bg-white border mt-5 mt-md-0 ms-md-5 p-5`}>
-                            {this.state.toggle === 'information' && (
-                                <UserInformation 
+                            {this.state.toggle === 'student details' && (
+                                <UserInformation
                                     username={this.state.user.username}
                                     firstName={this.state.user.firstName}
                                     lastName={this.state.user.lastName}
-                                    email={this.state.user.email} 
-                                    birthday={this.state.user.birthday} 
+                                    email={this.state.user.email}
+                                    birthday={this.state.user.birthday}
                                     onChangeInfo={this.changeUserInformation}
                                 />
                             )}
-                            {this.state.toggle === 'password' && (
-                                <UserChangePassword 
+                            {this.state.toggle === 'change password' && (
+                                <UserChangePassword
                                     password={this.state.user.password}
-                                    onChangeInfo={this.changeUserInformation} 
+                                    onChangeInfo={this.changeUserInformation}
                                 />
+                            )}
+                            {this.state.toggle === 'apply for an ec' && (
+                                <>LAURA</>
                             )}
                         </Col>
                     </Row>
-                </div >
+                </div>
                 {createPortal((
-                    <Button 
-                        variant="primary" 
-                        className={styles["log-out-btn"]} 
+                    <Button
+                        variant="primary"
+                        className={styles["log-out-btn"]}
                         onClick={this.logOut}>
                         Log out
                     </Button>
