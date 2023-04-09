@@ -176,6 +176,7 @@ class Panel extends PureComponent {
                                     appliedITLIssues={JSON.parse(allUsers).flatMap((user) =>
                                         user?.appliedITLIssues?.length ? user.appliedITLIssues : [],
                                     )}
+                                    users={JSON.parse(allUsers).flatMap((user) => user)}
                                 />
                             ) : (
                                 <>
@@ -196,10 +197,15 @@ class Panel extends PureComponent {
                                         />
                                     )}
                                     {this.state.toggle === 'apply for an ec' && (
-                                        <EC appliedECs={user.appliedECs} onChangeInfo={this.changeUserInformation} />
+                                        <EC
+                                            userId={user.id}
+                                            appliedECs={user.appliedECs}
+                                            onChangeInfo={this.changeUserInformation}
+                                        />
                                     )}
                                     {this.state.toggle === 'report itl/ee issue' && (
                                         <ITL
+                                            userId={user.id}
                                             appliedITLIssues={user.appliedITLIssues}
                                             onChangeInfo={this.changeUserInformation}
                                         />

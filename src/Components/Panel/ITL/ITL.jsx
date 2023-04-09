@@ -10,7 +10,7 @@ import FormInput from '../../Forms/FormInput/FormInput';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ITL = (props) => {
-    const { appliedITLIssues = [], onChangeInfo } = props;
+    const { appliedITLIssues = [], onChangeInfo, userId } = props;
     const [submit, setSubmit] = useState(false);
     const formik = useFormik({
         initialValues: {
@@ -35,6 +35,7 @@ const ITL = (props) => {
                     description: values.description,
                     type: 'ITL',
                     status: 'Pending',
+                    userId: userId,
                 },
             ];
             onChangeInfo('appliedITLIssues', totalECs);

@@ -10,9 +10,9 @@ import FormInput from '../../Forms/FormInput/FormInput';
 import 'react-toastify/dist/ReactToastify.css';
 
 const EC = (props) => {
-    const { appliedECs = [], onChangeInfo } = props;
-    const notify = () => toast('Wow so easy!');
+    const { appliedECs = [], onChangeInfo, userId } = props;
     const [submit, setSubmit] = useState(false);
+
     const formik = useFormik({
         initialValues: {
             title: '',
@@ -36,6 +36,7 @@ const EC = (props) => {
                     description: values.description,
                     type: 'EC',
                     status: 'Pending',
+                    userId,
                 },
             ];
             onChangeInfo('appliedECs', totalECs);

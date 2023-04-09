@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import { v4 as uniqid } from 'uuid';
 import { Container, Button, Form } from 'react-bootstrap';
 
-// import utils 
+// import utils
 import { getStorage, setUserId, setUserInStorage } from '../../../utils/storage';
 
 const RegisterForm = ({ onRegister, onLogin }) => {
@@ -44,10 +44,10 @@ const RegisterForm = ({ onRegister, onLogin }) => {
         onSubmit: (values, { setFieldError }) => {
             if (getStorage('users')) {
                 const [isIterateUsername, isIterateEmail] = checkUser(values.username, values.email)
-                
-                if (isIterateUsername) 
+
+                if (isIterateUsername)
                     setFieldError('Username', 'Please change your username')
-                else if (isIterateEmail) 
+                else if (isIterateEmail)
                     setFieldError('Email', 'Please change your email')
                 else {
                     const userId = uniqid()
@@ -62,7 +62,6 @@ const RegisterForm = ({ onRegister, onLogin }) => {
             } else {
                 const userId = uniqid()
                 const users = [{ id: userId, ...values, isLogin: true, }]
-                
                 setUserId(userId)
                 setUserInStorage('users', users)
                 onRegister()
@@ -83,7 +82,7 @@ const RegisterForm = ({ onRegister, onLogin }) => {
             <Form noValidate className={styles.form} onSubmit={formik.handleSubmit}>
                 <h2>Register</h2>
 
-                <FormInput 
+                <FormInput
                     className="mt-5 mb-4"
                     controlId="usernameInp"
                     name="username"
@@ -96,7 +95,7 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                     {...formik.getFieldProps('username')}
                 />
 
-                <FormInput 
+                <FormInput
                     className="mb-4"
                     controlId="emailInp"
                     name="email"
@@ -109,7 +108,7 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                     {...formik.getFieldProps('email')}
                 />
 
-                <FormInput 
+                <FormInput
                     className="mb-4"
                     type="date"
                     controlId="birthdayInp"
@@ -123,7 +122,7 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                     {...formik.getFieldProps('birthday')}
                 />
 
-                <FormInput 
+                <FormInput
                     className="mb-4"
                     type="password"
                     controlId="passwordInp"
@@ -137,7 +136,7 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                     {...formik.getFieldProps('password')}
                 />
 
-                <FormInput 
+                <FormInput
                     className="mb-4"
                     type="password"
                     controlId="confirmPasswordInp"
@@ -151,7 +150,7 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                     {...formik.getFieldProps('confirmPassword')}
                 />
 
-                <Button 
+                <Button
                     onClick={() => onLogin('login')}
                     className='shadow-none mt-4 p-0'
                     type="button"
@@ -159,11 +158,11 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                     Already have an account? Login!
                 </Button>
 
-                <Button 
-                    className={`${styles["submit-btn"]} w-100`} 
+                <Button
+                    className={`${styles["submit-btn"]} w-100`}
                     onClick={() => setSubmit(true)}
                     disabled={submit && !formik.isValid ? true : false}
-                    variant="primary" 
+                    variant="primary"
                     type="submit">
                     Register
                 </Button>
